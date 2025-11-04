@@ -1,0 +1,15 @@
+<nav class="navbar">
+    <div class="container">
+        <ul class="nav-links">
+            <li><a href="/inspiration">Browse</a></li>
+            <% if (user) { %>
+                <li><a href="/inspiration/new">Add Post</a></li>
+                <li><a href="/auth/sign-out">Sign Out</a></li>
+                <li class="return-user"><a href="#">Welcome Back, <%= user.username %>!</a></li>
+            <% } else { %>
+                <li><a href="/auth/sign-in">Sign In</a></li>
+                <li><a href="/auth/sign-up">Sign Up</a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>

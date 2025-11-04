@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In Page</title>
     <link rel="stylesheet" href="../stylesheets/forms.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Create a new account!</h1>
+    <%- include('../partials/_navbar') %>
+    
     <form action="/auth/sign-in" method="POST">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required true />
