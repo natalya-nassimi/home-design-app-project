@@ -15,22 +15,21 @@ router.post('/sign-up', async (req, res) => {
         const password = req.body.password
 
         const confirmPassword = req.body.confirmPassword
-        if (password !== confirmPassword) return res.status(400).send('Passwords do not match❗️')
+        if (password !== confirmPassword) throw new Error('Passwords do not match!')
 
         const usernameInDatabase = await User.findOne({ username: username })
-        if (usernameInDatabase) return res.status(400).send('This username has already been used❗️')
+        if (usernameInDatabase) throw new Error('Username already taken')
 
         const emailInDatabase = await User.findOne({ email: email })
-        if (emailInDatabase) return res.status(400).send('This email has already been used❗️')
+        if (emailInDatabase) throw new Error('Email has already been used')
 
         req.body.password = bcrypt.hashSync(password, 12)
-        const createdUser = await User.create(req.body)
-        console.log(createdUser)
-
+        await User.create(req.body)
         res.redirect('/auth/sign-in')
+        
     } catch (error) {
-        console.error(error)
-        return res.status(500).send('Something went wrong')
+        console.error(error.message)
+        res.render('auth/sign-up.ejs', { message: error.message })
     }
 })
 
@@ -44,22 +43,23 @@ router.post('/sign-in', async (req, res) => {
         const password = req.body.password
 
         const existingUser = await User.findOne({ username: username })
-        if (!existingUser) return res.status(401).send('We could not find an account under this username')
+        if (!existingUser) throw new Error('We could not find an account under this username')
 
         if (!bcrypt.compareSync(password, existingUser.password)) {
-            return res.status(401).send('Incorrect password provided')
+            throw new Error('Incorrect password was provided')
         }
 
         req.session.user = {
             _id: existingUser._id,
             username: existingUser.username
         }
+        
         console.log('Logged in user:', req.session.user)
         req.session.save(() => res.redirect('/inspiration'))
 
     } catch (error) {
-        console.error(error)
-        return res.status(500).send('Something went wrong')
+        console.error(error.message)
+        res.render('auth/sign-in.ejs', { message: error.message })
     }
 })
 

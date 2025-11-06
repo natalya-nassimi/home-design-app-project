@@ -6,12 +6,12 @@ import 'dotenv/config'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passUserToView from './middleware/passUserToView.js'
+import passMessageToView from './middleware/passMessageToView'
 
 import authRouter from './controllers/auth.js'
 import inspoRouter from './controllers/inspiration.js'
 
 const app = express()
-console.log(process.env)
 
 // * Middleware
 app.use(express.urlencoded())
@@ -25,10 +25,11 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }))
 app.use(passUserToView)
+app.use(passMessageToView)
 
 // * Routes
 app.get('/', async (req, res) => {
-    res.render('index.ejs', { user: req.user || null })
+    res.render('index.ejs') // { user: req.user || null }
 })
 
 app.use('/auth', authRouter)

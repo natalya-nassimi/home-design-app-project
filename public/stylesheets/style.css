@@ -7,7 +7,7 @@
 html,
 body {
     height: 100%;
-    width: 100vw;
+    width: 100%;
     min-height: 100%;
     overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
@@ -22,9 +22,9 @@ body {
 
 .navbar {
     position: absolute;
+    top: 0;
     height: 70px;
     width: 100%;
-    top: 0;
     padding: 2rem 2rem;
     background-color: rgba(185, 176, 162, 0.4);
     display: flex;
@@ -40,7 +40,7 @@ body {
 
 .navbar .nav-links a {
     color: rgb(85, 83, 83);
-    font-size: 20px;
+    font-size: 1.3rem;
     font-weight: 500;
     text-decoration: none;
 }
@@ -51,21 +51,30 @@ body {
 
 .top-right {
     position: absolute;
-    top: 0;
+    top: 5rem;
     height: 70px;
     display: flex;
     align-items: center;
     right: 2rem;
-    font-size: 25px;
+    font-size: 1.5rem;
     color: #333;
+    background-color: rgba(153, 178, 206, 0.373);
+    border-radius: 1rem;
+    padding: 1.2rem;
 }
 
 .bottom-left {
     position: absolute;
-    bottom: 2rem;
+    bottom: 1.5rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
     left: 2rem;
-    font-size: 25px;
+    font-size: 1.5rem;
     color: #333;
+    background-color: rgba(153, 178, 206, 0.373);
+    border-radius: 1rem;
+    padding: 1.2rem;
 }
 
 .center-page {
@@ -74,19 +83,19 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    font-size: 25px;
+    gap: 1.5rem;
 }
 
 .center-line {
     font-style: italic;
+    font-size: 1.3rem;
 }
 
 .browse-btn {
     padding: 1rem 2rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 1.2rem;
     background-color: #807676;
     color: #fff;
     text-decoration: none;
@@ -119,7 +128,7 @@ body {
     font-size: 2.7rem;
     color: #3a3a3a;
     margin-bottom: 3rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1rem;
     font-weight: 600;
 }
 
@@ -138,21 +147,21 @@ body {
 
 .inspo-container {
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    box-shadow: 10px 10px 10px 10px rgba(159, 133, 133, 0.185);
+    border-radius: 1.5rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem 0.5rem rgba(159, 133, 133, 0.185);
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
     overflow: hidden;
 }
 
 .inspo-container:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.8rem rgba(0, 0, 0, 0.15);
 }
 
 .inspo-image-container {
     width: 100%;
-    height: 260px;
+    height: 18rem;
     overflow: hidden;
 }
 
@@ -164,7 +173,7 @@ body {
 }
 
 .inspo-container:hover img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .inspo-text {
@@ -189,7 +198,7 @@ body {
     margin-top: 0.7rem;
     font-size: 0.95rem;
     color: #555;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Show Page Styling */
@@ -234,7 +243,7 @@ body {
 }
 
 .show-title {
-  font-size: 30px;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #333;
   margin-bottom: 0.5rem;
@@ -248,14 +257,14 @@ body {
 }
 
 .show-description {
-  font-size: 17px;
+  font-size: 1rem;
   color: #444;
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
 }
 
 .show-owner {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #02678cab;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -264,14 +273,14 @@ body {
 .button {
     display: flex;
     justify-content: space-evenly;
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
 }
 
 .edit-btn {
   background-color: #807676;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.4rem;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
@@ -283,7 +292,7 @@ body {
   background-color: #807676;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.4rem;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
@@ -294,7 +303,7 @@ body {
   background-color: #807676;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.4rem;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
@@ -307,8 +316,8 @@ body {
 }
 
 .back-link {
-  padding-bottom: 15px;
-  font-size: 22px;
+  padding-bottom: 0.9rem;
+  font-size: 1.4rem;
   color: #555;
   text-decoration: none;
 }

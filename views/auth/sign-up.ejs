@@ -22,6 +22,10 @@
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" name="confirmPassword" id="confirmPassword" required true />
             <button type="submit">Sign up</button>
+
+            <% if (message) { %>
+            <p class="error-message"> <%= message %> </p>
+            <% } %>
         </form>
 </body>
 

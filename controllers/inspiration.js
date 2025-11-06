@@ -10,8 +10,8 @@ const router = express.Router()
 router.get('', async (req, res) => {
     try {
         const inspiration = await Inspo.find().populate('owner')
-        console.log('current user:', req.session.user)
-        res.render('inspiration/index.ejs', { inspiration, user: req.session.user || null })
+        res.render('inspiration/index.ejs', { inspiration })
+
     } catch (error) {
         console.error(error)
         return res.status(500).send('Something went wrong')
@@ -27,8 +27,9 @@ router.get('/new', isSignedIn, (req, res) => {
 router.get('/my-favourites', isSignedIn, async (req, res) => {
     try {
         const userId = req.session.user._id
-        const favourites = await Inspo.find({ favouritedBy: userId}).populate('owner')
-        res.render('inspiration/my-favs.ejs', { favourites, user: req.session.user})
+        const favourites = await Inspo.find({ favouritedBy: userId }).populate('owner')
+        res.render('inspiration/my-favs.ejs', { favourites })
+
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')
@@ -40,7 +41,8 @@ router.get('/my-posts', isSignedIn, async (req, res) => {
     try {
         const userId = req.session.user._id
         const myPosts = await Inspo.find({ owner: userId })
-        res.render('inspiration/my-posts.ejs', { myPosts, user: req.session.user })
+        res.render('inspiration/my-posts.ejs', { myPosts })
+
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')
@@ -52,8 +54,12 @@ router.get('/:inspoId', async (req, res) => {
     try {
         const inspoId = req.params.inspoId
         const inspo = await Inspo.findById(inspoId).populate('owner')
-        const checkLikes = inspo.favouritedBy.some(user => user.equals(req.session.user._id))
 
+        let checkLikes = false
+        if (req.session.user) {
+            checkLikes = inspo.favouritedBy.some(user => user.equals(req.session.user._id))
+        }
+        
         res.render('inspiration/show.ejs', { inspo, checkLikes })
 
     } catch (error) {
@@ -72,8 +78,8 @@ router.post('', isSignedIn, upload.single('imageURL'), async (req, res) => {
 
         req.body.owner = req.session.user._id
         const newInspo = await Inspo.create(req.body)
+        return res.redirect(`/inspiration/${newInspo._id}`) 
 
-        return res.redirect(`/inspiration/${newInspo._id}`)
     } catch (error) {
         console.error(error)
         return res.status(500).send('Something went wrong')
@@ -85,7 +91,6 @@ router.delete('/:inspoId', isSignedIn, async (req, res) => {
     try {
         const inspoId = req.params.inspoId
         const inspoToDelete = await Inspo.findById(inspoId)
-
         if (!inspoToDelete.owner.equals(req.session.user._id)) {
             return res.status(403).send('You do not have permission to delete this resource')
         }
@@ -109,8 +114,8 @@ router.get('/:inspoId/edit', isSignedIn, async (req, res) => {
             res.send('You do not have permission to edit this post')
             return res.redirect(`/inspiration/${inspoId}`)
         }
-
         res.render('inspiration/edit.ejs', { inspo })
+
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')
@@ -132,7 +137,6 @@ router.put('/:inspoId', isSignedIn, upload.single('imageURL'), async (req, res) 
 
         if(!inspo.owner.equals(req.session.user._id)) {
             return res.status(403).send('You do not have permission to edit this post')
-            // with flash message use this: res.redirect(`/inspiration/${inspoId}`)
         }
 
         await Inspo.findByIdAndUpdate(inspoId, req.body)
@@ -152,6 +156,7 @@ router.post('/:inspoId/favourited-by/:userId', isSignedIn, async (req, res) => {
             $push: { favouritedBy: req.session.user._id }
         })
         res.redirect(`/inspiration/${inspoId}`)
+
     } catch (error) {
         console.error(error)
         return res.status(500).send('Something went wrong')
@@ -166,6 +171,7 @@ router.delete('/:inspoId/favourited-by/:userId', isSignedIn, async (req, res) =>
             $pull: { favouritedBy: req.session.user._id }
         })
         res.redirect('/inspiration/my-favourites')
+
     } catch (error) {
         console.error(error)
         res.status(500).send('Something went wrong')

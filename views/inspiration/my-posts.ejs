@@ -15,6 +15,9 @@
   <main class="gallery">
     <h1 class="title">My Posts</h1>
     <div class="inspo-grid">
+      <%if (myPosts.length === 0) { %>
+            <p> You haven't posted anything yet! </p>   
+      <%  } %>
       <% myPosts.forEach(inspo => { %>
         <a href="/inspiration/<%= inspo._id %>" class="inspo-show">
           <div class="inspo-container">
