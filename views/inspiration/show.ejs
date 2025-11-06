@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+<%- include('../partials/_navbar') %>
+
+<main class="show-page">
+    <a href="/inspiration" class="back-link"> ⬅️ Back to Gallery</a>
+    <div class="show-inspo-container">
+        <div class="show-image-container">
+            <img src="<%= inspo.imageURL %>" alt="<%= inspo.title %>">
+        </div>
+        <div class="show-text">
+            <h1 class="show-title"> <%= inspo.title %> </h1>
+            <p class="show-details"> <%= inspo.style %> • <%= inspo.roomType %> </p>
+            <p class="show-description"> <%= inspo.description %> </p>
+            <p class="show-owner">Posted by: <%= inspo.owner.username %> </p>
+        </div>
+        
+        <div class="button">
+            <% if (user) { %>
+                <%if (checkLikes) { %>
+                    <form action="/inspiration/<%= inspo._id %>/favourited-by/<%= user._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="favourite-btn">🤍 Remove Favorites</button>
+                    </form>
+            <% } else { %>
+                    <form action="/inspiration/<%= inspo._id %>/favourited-by/<%= user._id %>" method="POST">
+                        <button type="submit" class="favourite-btn">❤️ Add to Favorites</button>
+                    </form>   
+            <% } %>
+            <% } %>
+
+            <% if(user && inspo.owner._id.equals(user._id)) { %>
+                <form action="/inspiration/<%= inspo._id %>?_method=DELETE" method="POST">
+                    <button class="delete-btn">💔 Delete</button>
+                </form>
+                <a class="edit-btn" href="/inspiration/<%= inspo._id %>/edit">Edit</a>
+            <% } %>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Inspo</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/forms.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('../partials/_navbar')%>
+        <form action="/inspiration/<%= inspo._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required value="<%= inspo.title %>" />
+            <label for="imageURL">Image:</label>
+                <div class="current-image">
+                    <img src="<%= inspo.imageURL %>" alt="<%= inspo.title %>" class="preview" id="preview">
+                </div>
+            <input type="file" name="imageURL" id="imageURL" accept="image/*"/>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" required value="<%= inspo.description %>"/>
+            <label for="style">Style:</label>
+            <input type="text" name="style" id="style" required value="<%= inspo.style %>"/>
+            <label for="roomType">Room:</label>
+            <input type="text" name="roomType" id="roomType" required value="<%= inspo.roomType %>"/>
+            <button type="submit">Update</button>
+        </form>
+
+<script>
+    const input = document.getElementById('imageURL')
+    const preview = document.getElementById('preview')
+
+    input.addEventListener('change', () => {
+        if (input.files[0]) {
+            preview.src = URL.createObjectURL(input.files[0])
+        }
+    })
+</script>
+
+</body>
+
+</html

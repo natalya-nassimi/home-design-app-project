@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspiration Gallery</title>
+    <title>My Gallery</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -13,9 +13,9 @@
 <%- include('../partials/_navbar') %>
 
   <main class="gallery">
-    <h1 class="title">Inspiration</h1>
+    <h1 class="title">My Posts</h1>
     <div class="inspo-grid">
-      <% inspiration.forEach(inspo => { %>
+      <% myPosts.forEach(inspo => { %>
         <a href="/inspiration/<%= inspo._id %>" class="inspo-show">
           <div class="inspo-container">
             <div class="inspo-image-container">
@@ -25,7 +25,6 @@
               <h2 class="inspo-title"><%= inspo.title %></h2>
               <p class="inspo-details"><%= inspo.style %> • <%= inspo.roomType %></p>
               <p class="inspo-description"><%= inspo.description %></p>
-              <p class="show-owner">Posted by: <%= inspo.owner.username %> </p>
             </div>
           </div>
         </a>

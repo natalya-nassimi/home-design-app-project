@@ -11,11 +11,13 @@
 
 <body>
 <%- include('../partials/_navbar') %>
-
   <main class="gallery">
-    <h1 class="title">Inspiration</h1>
+    <h1 class="title">My Favourites</h1>
     <div class="inspo-grid">
-      <% inspiration.forEach(inspo => { %>
+        <%if (favourites.length === 0) { %>
+            <p> You haven't favourited any posts yet! </p>   
+        <%  } %>
+      <% favourites.forEach(inspo => { %>
         <a href="/inspiration/<%= inspo._id %>" class="inspo-show">
           <div class="inspo-container">
             <div class="inspo-image-container">
