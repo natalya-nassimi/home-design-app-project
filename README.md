@@ -11,7 +11,7 @@ It allows users to browse, post and favourite different home decoration inspirat
 ![Show Page Screenshot](./images/show-page.png)
 
 ## Deployment Link
-Deployed on: [Netlify Link](homedesignapp-natalya.netlify.app)
+Deployed on: homedesignapp-natalya.netlify.app
 
 ## Getting Started / Code Installation
 
@@ -28,7 +28,7 @@ Deployed on: [Netlify Link](homedesignapp-natalya.netlify.app)
 ``npm install``
 
 This app uses Cloudinary's image upload service. This requires 3 additonal environment variables to be added to the .env file as below.
-Create an account at [cloudinary.com](cloudinary.com) if you don't already have one. You will find your 'Cloud name' on the Home Dashboard page. Click 'Go to API keys' and you will find your API Key and API Secret. Ensure you use the variable names listed below.
+Create an account at cloudinary.com if you don't already have one. You will find your 'Cloud name' on the Home Dashboard page. Click 'Go to API keys' and you will find your API Key and API Secret. Ensure you use the variable names listed below.
 
 4 Create a .env file to include:
 
