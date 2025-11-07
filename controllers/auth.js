@@ -1,10 +1,11 @@
 import express from 'express'
 import User from '../models/user.js'
 import bcrypt from 'bcrypt'
+import isSignedOut from '../middleware/is-signed-out.js'
 
 const router = express.Router()
 
-router.get('/sign-up', (req, res) => {
+router.get('/sign-up', isSignedOut, (req, res) => {
     res.render('auth/sign-up.ejs')
 })
 
@@ -33,7 +34,7 @@ router.post('/sign-up', async (req, res) => {
     }
 })
 
-router.get('/sign-in', (req, res) => {
+router.get('/sign-in', isSignedOut, (req, res) => {
     res.render('auth/sign-in.ejs')
 })
 
@@ -54,7 +55,6 @@ router.post('/sign-in', async (req, res) => {
             username: existingUser.username
         }
         
-        console.log('Logged in user:', req.session.user)
         req.session.save(() => res.redirect('/inspiration'))
 
     } catch (error) {

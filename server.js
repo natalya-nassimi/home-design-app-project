@@ -19,17 +19,17 @@ app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(express.static('public'))
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }))
 app.use(passUserToView)
 app.use(passMessageToView)
 
 // * Routes
 app.get('/', async (req, res) => {
-    res.render('index.ejs') // { user: req.user || null }
+  res.render('index.ejs') // { user: req.user || null }
 })
 
 app.use('/auth', authRouter)
@@ -37,12 +37,12 @@ app.use('/inspiration', inspoRouter)
 
 // * Connections
 const connect = async () => {
-    try {
-      await mongoose.connect(process.env.MONGODB_URI)
-      console.log('🔗 Database connection established')
-    } catch (error) {
-      console.error(error)
-    }
+  try {
+    await mongoose.connect(process.env.MONGODB_URI)
+    console.log('🔗 Database connection established')
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 connect()

@@ -2,37 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Gallery</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Gallery</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<%- include('../partials/_navbar') %>
+  <%- include('../partials/_navbar') %>
 
-  <main class="gallery">
-    <h1 class="title">My Posts</h1>
-    <div class="inspo-grid">
-      <%if (myPosts.length === 0) { %>
-            <p> You haven't posted anything yet! </p>   
-      <%  } %>
-      <% myPosts.forEach(inspo => { %>
-        <a href="/inspiration/<%= inspo._id %>" class="inspo-show">
-          <div class="inspo-container">
-            <div class="inspo-image-container">
-              <img src="<%= inspo.imageURL %>" alt="<%= inspo.title %>">
-            </div>
-            <div class="inspo-text">
-              <h2 class="inspo-title"><%= inspo.title %></h2>
-              <p class="inspo-details"><%= inspo.style %> • <%= inspo.roomType %></p>
-              <p class="inspo-description"><%= inspo.description %></p>
-            </div>
-          </div>
-        </a>
-      <% }) %>
-    </div>
-  </main>
+    <main class="gallery">
+      <h1 class="title">My Posts</h1>
+      <div class="inspo-grid">
+        <%if (myPosts.length===0) { %>
+          <p> You haven't posted anything yet! </p>
+        <% } %>
+            <% myPosts.forEach(inspo=> { %>
+              <a href="/inspiration/<%= inspo._id %>" class="inspo-show">
+                <div class="inspo-container">
+                  <div class="inspo-image-container">
+                    <img src="<%= inspo.imageURL %>" alt="<%= inspo.title %>">
+                  </div>
+                  <div class="inspo-text">
+                    <h2 class="inspo-title"> <%= inspo.title %> </h2>
+                    <p class="inspo-details"> <%= inspo.style %> • <%= inspo.roomType %> </p>
+                    <p class="inspo-description"> <%= inspo.description %> </p>
+                  </div>
+                </div>
+              </a>
+            <% }) %>
+      </div>
+    </main>
 </body>
+
 </html>
